@@ -95,5 +95,18 @@ mpg %>%
   newtheme
 ```
 
+# __Creating Our New Theme__
+```{r, echo = TRUE}
+library(ggthemes)
+library(extrafont)
+font_import()
+mpg %>%
+  ggplot()+
+  geom_point(aes(x=displ, y=hwy))+
+  theme(
+    text = element_text(family = "GillSans")
+  )
+```
+
 
 
