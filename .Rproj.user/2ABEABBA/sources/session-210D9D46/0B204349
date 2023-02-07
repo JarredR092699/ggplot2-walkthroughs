@@ -3,7 +3,7 @@
     "path": "//fileserver01/User$/jrobidoux/My Documents/R Files/ggplot2-walkthroughs/Creating a new ggtheme.Rmd",
     "project_path": "Creating a new ggtheme.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "4251883908",
     "contents": "",
     "dirty": true,
     "created": 1675779313879.0,
@@ -13,8 +13,8 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "61,0",
-        "scrollLine": "56",
+        "cursorPosition": "97,0",
+        "scrollLine": "87",
         "last_setup_crc32": "210D9D465f4acb41"
     },
     "folds": "",
@@ -22,7 +22,7 @@
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1675780584618,
+    "last_content_update": 1675782131444,
     "read_only": false,
     "read_only_alternatives": []
 }

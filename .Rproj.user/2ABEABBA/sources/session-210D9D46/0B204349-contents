@@ -59,4 +59,41 @@ Quitting R will erase the default theme setting. If you load ggplot2 in a future
         # function(...)ggplot2::theme_set(ggplot2::theme_minimal))
 ```
 
+# __Creating a New Theme__
+Perhaps the easiest thing to start with when customizing your own theme is to modify an existing theme (i.e. one that comes built-in to ggplot2). In case you're interested in thoroughly exploring this area and learning from others, there is also the ggthemes package on CRAN which provides a number of additional themes for ggplot2. 
+
+We will begin with the theme_bw() theme. This theme is a simple black and white theme that has little ornamentation and few features. 
+
+# __Modifying theme attributes__
+Suppose we want to make the default color for plot titles to be dark red. We can change just that element by adding a theme() modification to the exisiting theme. 
+```{r, echo = TRUE}
+newtheme <- theme_bw() + theme(plot.title = element_text(color = "darkred"))
+```
+Note thhat in our call to theme(), when we modify the plot.title attribute, we cannot simply say color = "darkred". This must be wrapped in a call to the element_text() function so that the elements of plot.title are appropriately modified. In the help page for theme(), you will see that each attribute of a theme is modified by using on or four element_* functions:
+
+-element_text(): Specify the display of text elements
+-element_line(): Specify the disply of lines (i.e. axis lines)
+-element_rect(): Specify the display of borders and backgrounds
+-element_blank(): draw nothing
+
+Let's change a few more things about our new theme. We can make the box surrounding the plot to look a little different by modifying the panel.border element of the theme. First let's take a look at what the value is by default. 
+```{r, echo = TRUE}
+newtheme$panel.border
+```
+You can see that this is an object of class element_rect and there are 5 elements in this list, including the fill, color, sizer, and linetype. These attributes have the same meaning as they do in the usual ggplot2 context. 
+
+Let's modify the color attribute to make it "steelblue" and modify the size attribute to make it a little bigger
+```{r, echo = TRUE}
+newtheme <- newtheme + theme(panel.border = element_rect(color = "steelblue", linewidth = 2))
+```
+Now let's see what this plot looks like
+```{r, echo = TRUE}
+mpg %>%
+  ggplot()+
+  geom_point(aes(x=drv, y=hwy))+
+  ggtitle("HWY MPG vs DRV")+
+  newtheme
+```
+
+
 
