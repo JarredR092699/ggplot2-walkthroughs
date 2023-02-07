@@ -15,5 +15,32 @@ library(dplyr)
 # __Bar Charts__
 There are two types of bar charts: **geom_bar()** and **geom_col()**. geom_bar() makes the height of the bar proportional to the number of cases in each group (or if the weight aesthetic is supplied, the sum of the weights). If you want the heights of the bars to represent values in the data, use geom_col() instead. geom_bar() uses stat_count() by default: it counts the number of cases at each x position. geom_col() uses stat_identity(): it leaves the data as is. 
 
+# __Example 1__
+Plot the classes of cars within the mpg data set
+```{r}
+knitr::opts_chunk$set(echo = TRUE)
+mpg %>%
+  ggplot(mapping=aes(x=class))+
+  geom_bar()
+```
+This bar plot is super basic and just plots the count of each class of car in our data set. 
+
+We can flip the orientation of this plot by running coord_flip() or setting y = class. Let's set y = class first
+```{r}
+mpg %>%
+  ggplot(mapping=aes(y=class))+
+  geom_bar()
+```
+
+If you want to create a stacked bar chart, we can use position = position_stack within the geom_bar() function. Make sure you set fill = to a variable in the data set. 
+```{r}
+mpg %>%
+  ggplot(mapping=aes(x=class))+
+  geom_bar(aes(fill=trans), position = position_stack())+
+  coord_flip()+
+  theme(legend.position = "top")+
+  theme_classic()
+```
+
 
 
