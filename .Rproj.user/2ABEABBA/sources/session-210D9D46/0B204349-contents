@@ -100,13 +100,42 @@ mpg %>%
 library(ggthemes)
 library(extrafont)
 font_import()
+loadfonts(device = "win", quiet = T)
 mpg %>%
   ggplot()+
   geom_point(aes(x=displ, y=hwy))+
+  labs(title = "HWY MPG vs Engine Displacement",
+       subtitle = "This chart compares hwy miles per gallon by engine size",
+       x = "Engine Displacement in Liters",
+       y = "HWY MPG")+
   theme(
-    text = element_text(family = "GillSans")
+    text = element_text(family = "Comic Sans MS", size = 14, hjust = 0.5),
+    plot.title = element_text(size = 14),
+    plot.caption = element_text(size = 28),
+    plot.caption.position = "plot",
+    panel.background = element_rect(fill = '#CCCCCC'),
+    panel.grid = element_line(color = '#6f6a6a'),
+    axis.title.y = element_text(color = '#888888'),
+    axis.title.x = element_text(color = "#888888"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    
   )
 ```
+A very useful tool to help determine what fonts you have is by running 
+```{r}
+# windowsFonts
+```
+When you are customizing your chart, it may be helpful to walkthrough the custom functions in theme() by ordering the changes in a hierarchy 
 
+-Label/Text
+-Plot Background/Lines
+-Axis
+-Facet
 
+# __Saving your plot__ 
+When you are ready to save your plot, you can use the ggsave function. 
+```{r, echo = TRUE}
+ggsave("example.png", height = 6, width = 6, dpi = "retina")
+```
 

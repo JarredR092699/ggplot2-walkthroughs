@@ -1,0 +1,45 @@
+
+# ----------- Install and Load Packages
+library(nbastatR)
+library(ggplot2)
+library(tidyverse)
+library(cowplot)
+Sys.setenv("VROOM_CONNECTION_SIZE" = 999999)
+
+# ------------ Player Career Points per Game Bar Chart
+# Pull and Manipulate the Data
+# Use players_career function to pull the player's career per game stats
+player_stats <- nbastatR::players_careers(players = c("Lauri Markkanen"), modes = c("PerGame")) %>%
+  filter(nameTable == "SeasonTotalsRegularSeason") %>%
+  unnest(dataTable)
+  
+player_stats %>%
+  ggplot()+
+  geom_bar(aes(x=slugSeason, y = pts),
+           stat = "identity", position = position_dodge(), fill = '#002B5C', color = "white", width = .6)+
+  scale_y_continuous(limits=c(0,35), expand = c(0,0))+
+  labs(title = "Lauri Markkanen - Career Points Per Game Trend",
+          subtitle = "Twitter: @JellyJNBA || Data: nbastatR\n",
+          x = "Season",
+          y = "Points Per Game\n")+
+geom_text(mapping = aes(x=slugSeason, y=pts, label = pts),
+          position = position_dodge(width = .9), size = 5, family = "Comic Sans MS", color = "white", vjust = 2, face = "bold")+
+theme(
+  plot.title = element_text(hjust = .5, size = 14, family = "Comic Sans MS", face = "bold", color = "white"),
+  plot.subtitle = element_text(hjust = .5, size = 8, family = "comic Sans MS", color = "gray50"),
+  text = element_text(family = "Comic Sans MS"),
+  legend.position = "none",
+  plot.background = element_rect(fill = "gray15", color = "gray15"),
+  panel.background = element_rect(fill = "gray15", color = "gray15"),
+  panel.grid.minor.y = element_blank(),
+  panel.grid.major.y = element_line(color = "gray20"),
+  panel.grid.major.x = element_blank(),
+  axis.line = element_line(color = "white"),
+  axis.title.x = element_text(color = "white", size = 10),
+  axis.title.y = element_text(color = "white", size = 10),
+  axis.text.x = element_text(color = "white", size = 8),
+  axis.text.y = element_text(color = "white", size = 8),
+  plot.margin = margin(.5, .5, .5, .5, "cm"),
+  strip.background = element_rect(fill = "gray20"),
+  strip.text = element_text(hjust = .5, size = 8, family = "comic Sans MS", face = "bold", color = "white")
+)
